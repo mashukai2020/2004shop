@@ -26,6 +26,10 @@ Route::prefix('/admin')->group(function(){
     Route::post('update/{id}','Admin\AdminController@update');
     Route::get('destory/{id}','Admin\AdminController@destory');
 });
+Route::prefix('/login')->group(function(){
+    Route::get('/','Login\LoginController@index');
+    Route::post('login_do','Login\LoginController@login_do');
+});
 
 
 

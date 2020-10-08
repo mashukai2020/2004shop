@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Admin;
 
 class AdminController extends Controller
 {
@@ -14,8 +15,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $res = \DB::table('admin')->select();
-        return view('admin.index',['res'=>$res]);
+        $res = Admin::all();
+        return view('admin/index',['res'=>$res]);
         // dd($res);
     }
     public function create()
@@ -26,6 +27,7 @@ class AdminController extends Controller
         // $time = time();
         $post = request()->except(['_token']);
         $post['time'] = time();
+        $post['ip'] = $_SERVER['REMOTE_ADDR'];
         // dump($post);exit;
         $res = \DB::table('admin')->insert($post);
         if($res){
@@ -33,10 +35,13 @@ class AdminController extends Controller
         }
 
     }
-    /**
-     * Show the form for creating a new resource.
-     *执行添加
-     * @return \Illuminate\Http\Response
-     */
+    public function destory($id)
+    {
+        //
+        $res= \DB::table('admin')->where('uid',$id)->delete();
+        if($res){
+            echo json_encode(['code'=>'00000','msg'=>'删除成功！']);die;
+        }
+    }
  
 }
