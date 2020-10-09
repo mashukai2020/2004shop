@@ -4,15 +4,10 @@ namespace App\Http\Controllers\Login;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Admin;
+use App\User;
 
 class LoginController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('login/create');
@@ -22,14 +17,14 @@ class LoginController extends Controller
     {
         $post = request()->except(['_token']);
         // dump($post);exit;
-        $admin = Admin::where('email',$post['email'])->first();
-        if(($admin->pwd)!=$post['pwd']){
+        $User = User::where('email',$post['email'])->first();
+        if(($User->pwd)!=$post['pwd']){
             return redirect('login')->with('msg','密码错误');
         }
-        if(($admin->email)!=$post['email']){
-            return redirect('login')->with('msg','用户名错误');
+        if(($User->email)!=$post['email']){
+            return redirect('login')->with('msg','邮箱错误');
         }
-        session(['admin'=>$admin]);
+        session(['User'=>$User]);
         return redirect('admin');
     }
 

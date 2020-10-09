@@ -25,11 +25,14 @@ Route::prefix('/admin')->group(function(){
     Route::get('edit/{id}','Admin\AdminController@edit');
     Route::post('update/{id}','Admin\AdminController@update');
     Route::get('destory/{id}','Admin\AdminController@destory');
+    Route::get('/redis','Admin\AdminController@redis');
 });
 Route::prefix('/login')->group(function(){
     Route::get('/','Login\LoginController@index');
     Route::post('login_do','Login\LoginController@login_do');
 });
+
+
 
 
 
