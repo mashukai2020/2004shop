@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Http\Request;
 use App\User;
 
@@ -43,11 +42,6 @@ class AdminController extends Controller
         if($res){
             echo json_encode(['code'=>'00000','msg'=>'删除成功！']);die;
         }
-    }
-    
-    public function redis(){
-        $user = Redis::get('123');
-        dump($user);exit;
     }
 
 

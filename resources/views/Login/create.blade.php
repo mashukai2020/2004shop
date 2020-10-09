@@ -11,7 +11,9 @@
     <center><h1>登入</h1></center>
         <center>
             <input type="text" name="email">邮箱<br>
+            <b style="color:green">{{$errors->first('email')}}</b><br>
             <input type="password" name="pwd">密码<br>
+            <b style="color:green">{{$errors->first('pwd')}}</b><br>
             <input type="submit">
         </center>
     </form>
