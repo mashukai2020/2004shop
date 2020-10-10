@@ -1,10 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Login;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redis;
-
 use Illuminate\Http\Request;
 use App\User;
 use Validator;
@@ -23,11 +21,13 @@ class LoginController extends Controller
         'email' => 'required',
         'pwd' => 'required',
         ],[
-                'email.required'=>'邮箱必填',
-                'pwd.required'=>'密码必填',
+        'email.required'=>'邮箱必填',
+        'pwd.required'=>'密码必填',
         ]); 
+        $a = $validator->customMessages;
+        // dd($a);
         if ($validator->fails()) {
-             return redirect('login') ->withErrors($validator) ->withInput();
+            return view("Login.create",["a"=>$a]);
          }
         // dump($post);exit;
         $User = User::where("email",$post["email"])->first();
@@ -38,7 +38,10 @@ class LoginController extends Controller
         if(($User->pwd)!=$post["pwd"]){
             $key = "0";
             $user = Redis::incr("key");
-            echo $user;
+            // echo $user;
+            if($user>=5){
+                die;
+            }
             return redirect('login');
         }
         // if(($User->email)!=$post['email']){
@@ -46,8 +49,8 @@ class LoginController extends Controller
         //     $user = Redis::incr('key');
         //     echo"密码错误".$user;
         //     if($key>=5){
-        //         echo"失败";
-        //     }
+            //     echo"失败";
+            // }
         //     return redirect('login')->with('msg','邮箱错误');
         // }
         session(['User'=>$User]);
