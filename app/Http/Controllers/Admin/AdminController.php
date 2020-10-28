@@ -43,6 +43,11 @@ class AdminController extends Controller
             echo json_encode(['code'=>'00000','msg'=>'删除成功！']);die;
         }
     }
+    public function tui(Request $request)
+    {
+        $request->session('User')->flush(); 
+        return redirect('login');
+    }
 
 
  

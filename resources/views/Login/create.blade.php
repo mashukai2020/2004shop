@@ -12,9 +12,9 @@
         <center>
             <input type="text" id="email" name="email">邮箱
             <br>
-            <b style="color:red;display:none" class="email">{{$a["email.required"]}}</b><br>
+            <b style="color:red;display:none" class="email">空</b><br>
             <input type="password" id="pwd" name="pwd">密码<br>
-            <b style="color:red;display:none" class="pwd">{{$a["pwd.required"]}}</b><br>
+            <b style="color:red;display:none" class="pwd">空</b><br>
             <input type="submit">
         </center>
     </form>

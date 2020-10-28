@@ -15,20 +15,7 @@ class LoginController extends Controller
     }
     public function login_do(Request $request)
     {
-        $post = request()->except(["_token"]);
-        $validator = Validator::make($post,
-        [
-        'email' => 'required',
-        'pwd' => 'required',
-        ],[
-        'email.required'=>'邮箱必填',
-        'pwd.required'=>'密码必填',
-        ]); 
-        $a = $validator->customMessages;
-        // dd($a);
-        if ($validator->fails()) {
-            return view("Login.create",["a"=>$a]);
-         }
+        $post = request()->except(["_token"]); 
         // dump($post);exit;
         $User = User::where("email",$post["email"])->first();
         // dump($User);exit;
@@ -36,12 +23,12 @@ class LoginController extends Controller
             return redirect('login');
         }
         if(($User->pwd)!=$post["pwd"]){
-            $key = "0";
-            $user = Redis::incr("key");
-            // echo $user;
-            if($user>=5){
-                die;
-            }
+            // $key = "0";
+            // $user = Redis::incr("key");
+            // // echo $user;
+            // if($user>=5){
+            //     die;
+            // }
             return redirect('login');
         }
         // if(($User->email)!=$post['email']){

@@ -6,11 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-<table border="1"> 
+<table border="1">
+<h2><a href="{{('/admin/tui')}}">退出</a></h2> 
     <tr>
         <td>id</td>
-        <td>管理员名字</td>
-        <td>管理员邮箱</td>
+        <td>用户名字</td>
+        <td>用户邮箱</td>
         <td>注册时间</td>
         <td>ip</td>
         <td>操作</td>
